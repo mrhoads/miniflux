@@ -42,10 +42,6 @@ jobs:
         with:
           fetch-depth: 0
         
-      - name: Get Tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-
       - name: Generate Alpine Docker tag
         id: docker_alpine_tag
         run: |
@@ -82,4 +78,4 @@ jobs:
           push: true
           build-args: |
             version=${{ steps.tag.outputs.tag }}
-          tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
+          tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ github.run_id }}
